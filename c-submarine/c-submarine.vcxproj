@@ -139,17 +139,17 @@
     <ClCompile Include="game\player.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="maths\maths.c" />
+    <ClCompile Include="ui\ui-compass.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\clock.h" />
-    <ClInclude Include="core\loader.h" />
     <ClInclude Include="game-core.h" />
     <ClInclude Include="game-state.h" />
     <ClInclude Include="game\compass.h" />
-    <ClInclude Include="game\level.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="maths\maths.h" />
     <ClInclude Include="game\player.h" />
+    <ClInclude Include="ui\ui-compass.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

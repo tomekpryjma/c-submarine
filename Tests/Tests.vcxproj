@@ -77,7 +77,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)c-submarine\maths;$(SolutionDir)c-submarine\game;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)c-submarine\maths;$(SolutionDir)c-submarine\game;$(SolutionDir)c-submarine\ui;$(SolutionDir)c-submarine\libs\SDL2-2.28.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -101,7 +101,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)c-submarine\x64\Debug\maths.obj;$(SolutionDir)c-submarine\x64\Debug\compass.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)c-submarine\x64\Debug\maths.obj;$(SolutionDir)c-submarine\x64\Debug\compass.obj;$(SolutionDir)c-submarine\x64\Debug\ui-compass.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
