@@ -1,6 +1,7 @@
 #include "game-core.h"
 #include "maths/maths.h"
 #include "core/clock.h"
+#include "game/compass.h"
 
 struct GameCore* GameCore_Alloc() {
 	struct GameCore* gameCore = malloc(sizeof(struct GameCore));
@@ -45,6 +46,9 @@ void GameCore_GameLoop(struct GameCore* gameCore) {
 	bool lastRadarShouldPing = false;
 	Uint32 radarRun = gameCore->clock->now + RADAR_DELAY;
 	
+	Compass compass;
+	Compass_Setup(&compass);
+	
 	gameCore->player->worldPosition = (Vector){300, 220};
 	
 	Vector linePosition = { 100, WIN_HEIGHT - 100 };
@@ -59,6 +63,7 @@ void GameCore_GameLoop(struct GameCore* gameCore) {
 	Vector miniMapPositions[2] = { (Vector) { 0,0 } };
 	Vector miniMapPositionsClamped[2] = { (Vector) { 0,0 } };
 	Vector gameWorldPositions[2] = { (Vector) { 0,0 } };
+	int mouseX, mouseY;
 	
 	while (gameCore->state->isRunning) {
 		Clock_Tick(gameCore->clock);
@@ -69,6 +74,8 @@ void GameCore_GameLoop(struct GameCore* gameCore) {
 				GameState_SetIsRunning(gameCore->state, false);
 			}
 		}
+
+		SDL_GetMouseState(&mouseX, &mouseY);
 
 		if (radarShouldPing) {
 			angleRad += 5 * gameCore->clock->delta;
@@ -180,6 +187,19 @@ void GameCore_GameLoop(struct GameCore* gameCore) {
 		// Draw radar container box
 		SDL_SetRenderDrawColor(gameCore->renderer, 255, 255, 255, 255);
 		SDL_RenderDrawRect(gameCore->renderer, &(SDL_Rect) { linePosition.x - RADAR_SIZE_XY / 2, linePosition.y - RADAR_SIZE_XY / 2, RADAR_SIZE_XY, RADAR_SIZE_XY });
+
+		SDL_RenderDrawRect(gameCore->renderer, &compass.ui.rect);
+
+		// TODO: temporary test
+		SDL_Point pt = { mouseX, mouseY };
+		if (SDL_PointInRect(&pt, &compass.ui)) {
+			SDL_PixelFormat pxfmt = { .format = SDL_GetWindowPixelFormat(gameCore->window) };
+			SDL_Surface *surf = SDL_CreateRGBSurface(0, compass.ui.rect.w, compass.ui.rect.h, 1, 1, 0, 0, 0);
+			SDL_Texture* texture = SDL_CreateTextureFromSurface(gameCore->renderer, surf);
+			SDL_RenderCopy(gameCore->renderer, texture, NULL, &compass.ui);
+			SDL_FreeSurface(surf);
+			SDL_DestroyTexture(texture);
+		}
 
 		SDL_RenderPresent(gameCore->renderer);
 
