@@ -8,3 +8,5 @@
 
 #define RADAR_SIZE_XY 150
 #define RADAR_DELAY 2000
+
+#define THINGS_NUM_MAX 10
