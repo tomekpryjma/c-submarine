@@ -39,6 +39,12 @@
     <ClCompile Include="ui\ui-compass.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="game\radar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ui-radar.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game-core.h">
@@ -63,6 +69,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ui\ui-compass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\radar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\thing_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\ui-radar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

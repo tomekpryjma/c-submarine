@@ -137,19 +137,24 @@
     <ClCompile Include="game-state.c" />
     <ClCompile Include="game\compass.c" />
     <ClCompile Include="game\player.c" />
+    <ClCompile Include="game\radar.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="maths\maths.c" />
     <ClCompile Include="ui\ui-compass.c" />
+    <ClCompile Include="ui\ui-radar.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\clock.h" />
     <ClInclude Include="game-core.h" />
     <ClInclude Include="game-state.h" />
     <ClInclude Include="game\compass.h" />
+    <ClInclude Include="game\radar.h" />
+    <ClInclude Include="game\thing_manager.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="maths\maths.h" />
     <ClInclude Include="game\player.h" />
     <ClInclude Include="ui\ui-compass.h" />
+    <ClInclude Include="ui\ui-radar.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
