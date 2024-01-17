@@ -138,6 +138,8 @@
     <ClCompile Include="game\compass.c" />
     <ClCompile Include="game\player.c" />
     <ClCompile Include="game\radar.c" />
+    <ClCompile Include="game\thing.c" />
+    <ClCompile Include="game\thing_manager.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="maths\maths.c" />
     <ClCompile Include="ui\ui-compass.c" />
@@ -148,7 +150,9 @@
     <ClInclude Include="game-core.h" />
     <ClInclude Include="game-state.h" />
     <ClInclude Include="game\compass.h" />
+    <ClInclude Include="game\enums\thing_type_enum.h" />
     <ClInclude Include="game\radar.h" />
+    <ClInclude Include="game\thing.h" />
     <ClInclude Include="game\thing_manager.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="maths\maths.h" />

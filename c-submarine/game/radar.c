@@ -45,7 +45,8 @@ void Radar_Ping(Radar* radar, const Clock* clock, const Player* player, const Th
 			float yLerp = M_Lerp(rayEndpoint.y - rayDir.y, rayEndpoint.y, t);
 
 			for (int i = 0; i < THINGS_NUM_MAX; i++) {
-				Vector* ufo = &manager->things[i];
+				Thing thing = manager->things[i];
+				Vector* ufo = &thing.position;
 				if (
 					xLerp > ufo->x && xLerp < ufo->x + 5 && // 5 is hardcoded for now as the width
 					yLerp > ufo->y && yLerp < ufo->y + 5

@@ -5,6 +5,8 @@
 #include "game/radar.h"
 #include "ui/ui-radar.h"
 #include "game/thing_manager.h"
+#include <stdlib.h>
+#include <time.h>
 
 struct GameCore* GameCore_Alloc() {
 	struct GameCore* gameCore = malloc(sizeof(struct GameCore));
@@ -37,6 +39,8 @@ void GameCore_Init(struct GameCore* gameCore) {
 	gameCore->state = GameState_Alloc();
 	gameCore->clock = Clock_Alloc();
 	gameCore->player = Player_Alloc();
+
+	srand(time(NULL));
 }
 
 void GameCore_Print(char* message) {
@@ -47,25 +51,14 @@ void GameCore_GameLoop(struct GameCore* gameCore) {
 	SDL_Event e;
 	Compass compass;
 	Radar radar;
+	ThingManager thingManager;
+	int mouseX, mouseY;
+
 	Compass_Setup(&compass);
 	Radar_Setup(&radar, gameCore->clock->now);
-
-	// WIP dirty setup test
-	ThingManager thingManager;
-	for (int i = 0; i < THINGS_NUM_MAX; i++) {
-		Vector thing = { 0,0 };
-
-		if (i == 3) {
-			thing.x = 380;
-			thing.y = 190;
-		}
-
-		thingManager.things[i] = thing;
-	}
+	ThingManager_Setup(&thingManager);
 	
 	gameCore->player->worldPosition = (Vector){300, 220};
-	
-	int mouseX, mouseY;
 	
 	while (gameCore->state->isRunning) {
 		Clock_Tick(gameCore->clock);
@@ -78,12 +71,16 @@ void GameCore_GameLoop(struct GameCore* gameCore) {
 		}
 
 		SDL_GetMouseState(&mouseX, &mouseY);
+		ThingManager_Update(&thingManager, gameCore->clock);
 
 		if (radar.shouldPing) {
 			Radar_Ping(&radar, gameCore->clock, gameCore->player, &thingManager);
 			Radar_After(&radar, gameCore->clock->now);
 		}
 
+		// 
+		// Draw
+		//
 		SDL_SetRenderDrawColor(gameCore->renderer, 0, 0, 0, 255);
 		SDL_RenderClear(gameCore->renderer);
 
@@ -91,8 +88,8 @@ void GameCore_GameLoop(struct GameCore* gameCore) {
 			Vector lineParts[] = { radar.lineOrigin, radar.linePosition, radar.lineEndpoint };
 			UiRadar_DrawPing(gameCore->renderer, radar.detectionPositionsClamped, lineParts);
 		}
+		
 		UiRadar_DrawContainer(gameCore->renderer, radar.linePosition);
-
 		SDL_RenderDrawRect(gameCore->renderer, &compass.ui.rect);
 
 		// TODO: temporary test

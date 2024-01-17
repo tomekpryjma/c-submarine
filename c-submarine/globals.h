@@ -10,3 +10,4 @@
 #define RADAR_DELAY 2000
 
 #define THINGS_NUM_MAX 10
+#define EDGE_SPAWN_BUFFER 10 // 10px at the edge of the playing window so Things can spawn off-screen & not get destroyed immediately.
